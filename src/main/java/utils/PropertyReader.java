@@ -19,6 +19,6 @@ public class PropertyReader {
     public String getProperty(String key) {
         return properties.getProperty(key);
     }
-    //corrigir erros
+
 }
 

@@ -20,5 +20,8 @@ public class Config {
     public static String getLoginPassword() {
         return reader.getProperty("login.password");
     }
+    public static String getDriver() {
+        return reader.getProperty("driver");
+    }
 }
 

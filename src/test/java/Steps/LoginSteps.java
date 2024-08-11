@@ -3,12 +3,14 @@ package Steps;
 import config.Config;
 import factory.DriverFactory;
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import pageObjects.PaginaInicial;
 import pageObjects.PaginaLogin;
+import utils.PropertyReader;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,7 +18,14 @@ public class LoginSteps {
     private WebDriver driver;
     private PaginaLogin paginaLogin;
     private PaginaInicial paginaInicial;
+    private PropertyReader propertyReader;
 
+    public LoginSteps(){
+        driver = DriverFactory.getDriver();
+        paginaLogin = new PaginaLogin(driver);
+        propertyReader = new PropertyReader();
+
+    }
 
     @Given("que estou na página de login")
     public void que_estou_na_pagina_de_login() {

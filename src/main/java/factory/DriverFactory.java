@@ -9,9 +9,9 @@ public class DriverFactory {
     private static WebDriverThread webDriverThread = new WebDriverThread();
 
     public static WebDriver getDriver() {
-        if (webDriverThread.getDriver() == null) {
+        if (webDriverThread.getDriver() == null ) {
             String browser = Config.getBrowser();
-            switch (browser) {
+            switch (browser.toLowerCase()) {
                 case "chrome":
                     System.setProperty("webdriver.chrome.driver", Config.getDriverPath());
                     webDriverThread.setDriver(new ChromeDriver());
@@ -21,15 +21,16 @@ public class DriverFactory {
                     webDriverThread.setDriver(new FirefoxDriver());
                     break;
                 default:
-                    throw new IllegalArgumentException("Browser não suportado: " + browser);
+                    throw new IllegalArgumentException("Unsupported browser: " + browser);
             }
         }
         return webDriverThread.getDriver();
     }
 
     public static void quitDriver() {
-        webDriverThread.quitDriver();
+        if (webDriverThread.getDriver() != null) {
+            webDriverThread.getDriver().quit();
+            webDriverThread.setDriver(null);
+        }
     }
-
-
 }

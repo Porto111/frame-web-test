@@ -9,7 +9,6 @@ public class PaginaLogin {
     private By passwordField = By.id("password");
     private By loginButton = By.id("loginButton");
 
-
     public PaginaLogin(WebDriver driver) {
         this.driver = driver;
     }

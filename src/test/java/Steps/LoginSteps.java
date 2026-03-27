@@ -1,4 +1,4 @@
-package steps;
+package Steps;
 
 import config.Config;
 import contexto.TestContext;

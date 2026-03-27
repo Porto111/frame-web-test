@@ -99,7 +99,7 @@ public class PropertyReader {
     /**
      * Obtém propriedade como boolean
      */
-    public boolean getBooleanProperty(String key) {
+    public boolean getBooleanProperty(String key, boolean b) {
         String value = getProperty(key);
         return Boolean.parseBoolean(value);
     }

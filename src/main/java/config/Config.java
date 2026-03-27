@@ -31,7 +31,7 @@ public class Config {
     }
 
     public static boolean isHeadless() {
-        return reader.getBooleanProperty("browser.headless");
+        return reader.getBooleanProperty("browser.headless", true);
     }
 
     public static int getImplicitWait() {

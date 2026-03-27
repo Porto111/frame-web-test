@@ -1,60 +1,61 @@
-//package Steps;
-//
-//import factory.DriverFactory;
-//import io.cucumber.java.AfterAll;
-//import io.cucumber.java.BeforeAll;
-//import org.openqa.selenium.WebDriver;
-//import pageObjects.PaginaInicial;
-//import pageObjects.PaginaLogin;
-//import utils.PropertyReader;
-//
-//public class Hooks {
-//    private static WebDriver driver;
-//    private static PaginaLogin paginaLogin;
-//    private static PaginaInicial paginaInicial;
-//    private static PropertyReader propertyReader;
-//
-//    @BeforeAll
-//    public static void setUp() {
-//        driver = DriverFactory.getDriver();
-//        propertyReader = new PropertyReader();
-//        paginaLogin = new PaginaLogin(driver);
-//        driver.get("https://web-premio-empreendedor-sabesp.dev.internal.solutis.xyz/");
-//    }
-//
-//    @AfterAll
-//    public static void tearDown() {
-//        DriverFactory.quitDriver();
-//    }
-//}
+package steps;
 
-package Steps;
-
-import factory.DriverFactory;
+import contexto.TestContext;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import org.openqa.selenium.WebDriver;
-import pageObjects.PaginaInicial;
-import pageObjects.PaginaLogin;
-import utils.PropertyReader;
+import io.cucumber.java.Scenario;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import utils.ScreenshotUtil;
 
+/**
+ * Hooks do Cucumber - executados antes e depois de cada cenário.
+ * Utiliza injeção de dependência via PicoContainer.
+ */
 public class Hooks {
-    private WebDriver driver;
-    private PaginaLogin paginaLogin;
-    private PaginaInicial paginaInicial;
-    private PropertyReader propertyReader;
+
+    private static final Logger logger = LoggerFactory.getLogger(Hooks.class);
+    private final TestContext context;
+
+    /**
+     * Construtor com injeção de dependência do PicoContainer
+     */
+    public Hooks(TestContext context) {
+        this.context = context;
+    }
 
     @Before
-    public void setUp() {
-        driver = DriverFactory.getDriver();
-        propertyReader = new PropertyReader();
-        paginaLogin = new PaginaLogin(driver);
-        driver.get("https://web-premio-empreendedor-sabesp.dev.internal.solutis.xyz/");
+    public void setUp(Scenario scenario) {
+        logger.info("========================================");
+        logger.info("Iniciando cenário: {}", scenario.getName());
+        logger.info("Tags: {}", scenario.getSourceTagNames());
+        logger.info("========================================");
     }
 
     @After
-    public void tearDown() {
-        DriverFactory.quitDriver();
+    public void tearDown(Scenario scenario) {
+        if (scenario.isFailed()) {
+            logger.error("Cenário FALHOU: {}", scenario.getName());
+
+            // Captura screenshot em caso de falha
+            try {
+                byte[] screenshot = ScreenshotUtil.captureScreenshotAsBytes(context.getDriver());
+                scenario.attach(screenshot, "image/png", "Screenshot da falha");
+                logger.info("Screenshot capturado com sucesso");
+            } catch (Exception e) {
+                logger.error("Erro ao capturar screenshot: {}", e.getMessage());
+            }
+        } else {
+            logger.info("Cenário PASSOU: {}", scenario.getName());
+        }
+
+        // Limpa o contexto e fecha o driver
+        context.limparContexto();
+
+        logger.info("========================================");
+        logger.info("Finalizando cenário: {}", scenario.getName());
+        logger.info("Status: {}", scenario.isFailed() ? "FALHOU" : "PASSOU");
+        logger.info("========================================\n");
     }
 }
 

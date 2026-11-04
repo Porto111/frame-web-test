@@ -1,7 +1,6 @@
 package Steps;
 
 import config.Config;
-import contexto.TestContext;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -19,13 +18,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LoginSteps {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginSteps.class);
-    private final TestContext context;
+    private final Config context;
     private final PaginaLogin paginaLogin;
 
     /**
      * Construtor com injeção de dependência do PicoContainer
      */
-    public LoginSteps(TestContext context) {
+    public LoginSteps(Config context) {
         this.context = context;
         this.paginaLogin = context.getPaginaLogin();
     }

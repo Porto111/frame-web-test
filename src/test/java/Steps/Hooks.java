@@ -1,6 +1,6 @@
 package Steps;
 
-import contexto.TestContext;
+import config.Config;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -15,12 +15,12 @@ import utils.ScreenshotUtil;
 public class Hooks {
 
     private static final Logger logger = LoggerFactory.getLogger(Hooks.class);
-    private final TestContext context;
+    private final Config context;
 
     /**
      * Construtor com injeção de dependência do PicoContainer
      */
-    public Hooks(TestContext context) {
+    public Hooks(Config context) {
         this.context = context;
     }
 

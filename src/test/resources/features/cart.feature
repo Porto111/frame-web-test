@@ -16,7 +16,7 @@ Funcionalidade: Carrinho de compras
   Cenário: Adicionar dois produtos ao carrinho
     Quando eu adiciono o produto "Sauce Labs Backpack" ao carrinho
     E eu adiciono o produto "Sauce Labs Bike Light" ao carrinho
-    Então o carrinho deve exibir 2 itens
+    Então o carrinho deve exibir 2 item
 
   Cenário: Remover o único produto do carrinho
     Quando eu adiciono o produto "Sauce Labs Backpack" ao carrinho

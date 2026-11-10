@@ -50,7 +50,7 @@ mvn test -Dcucumber.filter.tags="@negativo" # só os cenários negativos
 ```
 
 ## Relatório
-
+![img.png](img.png)
 Ao terminar, o relatório fica em `target/cucumber-reports/report.html`. Quando um cenário falha, o relatório traz um **screenshot** da tela no momento do erro.
 
 No GitHub, o relatório de cada execução pode ser baixado na aba **Actions**, no item *relatorio-cucumber*.

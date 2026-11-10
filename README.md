@@ -59,7 +59,7 @@ No GitHub, o relatório de cada execução pode ser baixado na aba **Actions**, 
 
 ```text
 src/test
-├── java/io/github/porto111/frameweb
+├── java
 │   ├── config/    Config.java          leitura das configurações
 │   ├── driver/    DriverFactory.java   abre e fecha o navegador
 │   ├── pages/     BasePage, LoginPage, ProductsPage   (Page Objects)
@@ -67,7 +67,7 @@ src/test
 │   ├── hooks/     Hooks.java           screenshot em falha e fechamento do navegador
 │   └── runner/    TestRunner.java      ponto de entrada da execução
 └── resources
-    ├── features/  login.feature, carrinho.feature
+    ├── features/  login.feature, cart.feature
     ├── config.properties
     └── logback-test.xml
 ```
